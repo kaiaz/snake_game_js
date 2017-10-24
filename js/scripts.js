@@ -2,7 +2,16 @@
 
 var startGame = {
 
+    pressStart: function () {
+       addEventListener('keypress', function (event) {
+            if(event.keyCode == 32) {
+                createSnake.init();
+            }
+        })
+    }
 };
+
+startGame.pressStart();
 
 //GameOver
 
@@ -20,13 +29,49 @@ var board = {
 
 
 // snake
-var snake = {
-    snakeLength: 2,
 
+function Snake(snakeLength, snakeStep) {
+    this.snakeLength = snakeLength;
+    this.snakeStep = snakeStep;
+}
+
+Snake.prototype.snakeIncrease = function (value) {
+
+    if(value) {
+        this.snakeLength++;
+    }
+};
+
+Snake.prototype.eatfood = function (value) {
+
+};
+
+Snake.prototype.changeStep = function() {
+    var elem = document.querySelector('.snake');
+    createSnake.snakeStep += 30;
+    elem.style.top = createSnake.snakeStep + 'px';
+};
+
+Snake.prototype.init = function() {
+    setInterval(this.changeStep, 70);
+};
+
+var createSnake = new Snake(2, 30);
+
+console.log(createSnake);
+
+
+/*var snake = {
+    snakeLength: 2,
+    snakeStep: 30,
 
 
     snakeMove: function () {
         var elem = document.querySelector('.snake');
+        this.snakeStep += 30;
+        debugger;
+        console.log(this.snakeStep);
+        elem.style.top += this.snakeStep + 'px';
 
     },
 
@@ -42,8 +87,13 @@ var snake = {
 
     eatfood: function (value) {
 
+    },
+
+    init: function() {
+        setInterval(this.snakeMove, 50);
     }
-};
+
+};*/
 
 // food
 
@@ -77,5 +127,13 @@ var food = {
 food.createFood();
 food.generateFoodPos();
 food.addFoodPos();
+
+
+
+
+
+
+
+
 
 

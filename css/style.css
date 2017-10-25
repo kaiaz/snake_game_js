@@ -16,24 +16,30 @@
     height: 800px;
     margin: 100px auto;
     background: #18ad8f;
+    z-index: 5;
 }
 
 .snake {
     position: absolute;
     top: 30px;
-    background: #fff;
-    border: 2px solid darkolivegreen;
-
 }
 
 .snake_part {
     width: 30px;
     height: 30px;
-    border-bottom: 2px solid darkolivegreen;
+    border: 2px solid darkolivegreen;
+    background: #fff;
 
 }
 
 
+/*.snake_part-1 {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    z-index: 10;
+    background: #fff;
+}*/
 
 .food {
     position: absolute;

@@ -41,7 +41,7 @@ function Snake(snakeLength, snakeStepX, snakeStepY) {
     this.snakeStepY = snakeStepY;
     this.snakeDirection = -1;
     this.snakeX = 0;
-    this.snakeY = 30;
+    this.snakeY = 0;
 }
 
 Snake.prototype.snakeIncrease = function (value) {
@@ -54,8 +54,8 @@ Snake.prototype.snakeIncrease = function (value) {
 Snake.prototype.eatfood = function () {
     var snakeHead = document.querySelectorAll('.snake_part');
     var head = snakeHead[snakeHead.length - 1];
-    var headY = createSnake.snakeY + 90;
-    var headX = Math.abs(createSnake.snakeX);
+    var headY =  Math.abs(createSnake.snakeY) + 120;
+    var headX = Math.abs(createSnake.snakeX) + 30;
     debugger;
 
     if((food.posX === headX ) && (food.posY === headY)) {
@@ -77,7 +77,7 @@ Snake.prototype.changeStep = function() {
         case 1:
             createSnake.snakeStepY -= 30;
             elem.style.top = createSnake.snakeStepY + 'px';
-            createSnake.snakeY = 30;
+            createSnake.snakeY -= 30;
             break;
         case -1:
             createSnake.snakeStepY += 30;

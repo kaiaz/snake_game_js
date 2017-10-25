@@ -1,4 +1,8 @@
 //start game
+function rand(min,max,num){
+    return Math.floor(Math.floor(Math.random()*(max-min+1)+min) / num) * num;
+}
+
 
 var startGame = {
 
@@ -6,7 +10,7 @@ var startGame = {
        window.addEventListener('keypress', function (event) {
             if(event.keyCode === 32) {
                 createSnake.init();
-                
+                createSnake.keyListener();
             }
         });
     }
@@ -31,10 +35,13 @@ var board = {
 
 // snake
 
-function Snake(snakeLength, snakeStep) {
+function Snake(snakeLength, snakeStepX, snakeStepY) {
     this.snakeLength = snakeLength;
-    this.snakeStep = snakeStep;
+    this.snakeStepX = snakeStepX;
+    this.snakeStepY = snakeStepY;
     this.snakeDirection = -1;
+    this.snakeX = 0;
+    this.snakeY = 30;
 }
 
 Snake.prototype.snakeIncrease = function (value) {
@@ -44,9 +51,23 @@ Snake.prototype.snakeIncrease = function (value) {
     }
 };
 
-Snake.prototype.eatfood = function (value) {
+Snake.prototype.eatfood = function () {
+    var snakeHead = document.querySelectorAll('.snake_part');
+    var head = snakeHead[snakeHead.length - 1];
+    var headY = createSnake.snakeY + 90;
+    var headX = Math.abs(createSnake.snakeX);
+    debugger;
 
+    if((food.posX === headX ) && (food.posY === headY)) {
+        alert('Yeeee, boy!');
+    }
+
+    if((food.posX === createSnake.snakeX ) && (food.posY === createSnake.snakeY)) {
+        alert('It eated!');
+    }
 };
+
+
 
 Snake.prototype.changeStep = function() {
 
@@ -54,50 +75,56 @@ Snake.prototype.changeStep = function() {
 
     switch (createSnake.snakeDirection) {
         case 1:
-            createSnake.snakeStep -= 30;
-            elem.style.top = createSnake.snakeStep + 'px';
+            createSnake.snakeStepY -= 30;
+            elem.style.top = createSnake.snakeStepY + 'px';
+            createSnake.snakeY = 30;
             break;
         case -1:
-            createSnake.snakeStep += 30;
-            elem.style.top = createSnake.snakeStep + 'px';
+            createSnake.snakeStepY += 30;
+            elem.style.top = createSnake.snakeStepY + 'px';
+            createSnake.snakeY += 30;
             break;
         case -2:
-            createSnake.snakeStep -= 30;
-            elem.style.left = createSnake.snakeStep + 'px';
+            createSnake.snakeStepX -= 30;
+            elem.style.left = createSnake.snakeStepX + 'px';
+            createSnake.snakeX -= 30;
             break;
         case 2:
-            createSnake.snakeStep += 30;
-            elem.style.left = createSnake.snakeStep + 'px';
+            createSnake.snakeStepX += 30;
+            elem.style.left = createSnake.snakeStepX + 'px';
+            createSnake.snakeX += 30;
             break;
     }
+    createSnake.eatfood();
 };
 
 Snake.prototype.init = function() {
-    setInterval(this.changeStep, 200);
+    setInterval(this.changeStep, 500);
 };
 
 Snake.prototype.keyListener = function() {
     window.addEventListener('keypress', function (e) {
-        debugger;
+        // debugger;
         if(e.keyCode === 115) {
             createSnake.snakeDirection = -1;
-            alert(createSnake.snakeDirection);
+            /*alert(createSnake.snakeDirection);*/
         } else if (e.keyCode === 119) {
             createSnake.snakeDirection = 1;
-            alert(createSnake.snakeDirection);
+            /*alert(createSnake.snakeDirection);*/
         } else if(e.keyCode === 97) {
             createSnake.snakeDirection = -2;
-            alert(createSnake.snakeDirection);
+            /*alert(createSnake.snakeDirection);*/
         } else if(e.keyCode === 100) {
             createSnake.snakeDirection = 2;
-            alert(createSnake.snakeDirection);
+            /*alert(createSnake.snakeDirection);*/
         }
     });
 };
 
-var createSnake = new Snake(2, 30);
 
-createSnake.keyListener();
+
+
+var createSnake = new Snake(2, 30, 30);
 
 
 
@@ -179,8 +206,10 @@ var food = {
     },
 
     generateFoodPos: function () {
-        this.posX = Math.floor(Math.random() * 780);
-        this.posY = Math.floor(Math.random() * 780);
+        // this.posX = Math.floor(Math.random() * 800);
+        // this.posY = Math.floor(Math.random() * 800);
+        this.posX = rand(15, 785, 30);
+        this.posY = rand(15, 785, 30);
     },
 
      addFoodPos: function () {

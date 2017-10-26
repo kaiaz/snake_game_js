@@ -1,21 +1,16 @@
-var div = 1;
 
+var num = 0;
 
-function  startWatch() {
-
-   window.addEventListener('keypress', function (event) {
-
-        if(event.keyCode === 119) {
-            div = 2;
-            alert(div)
-        } else if(event.keyCode = 115) {
-            div = 3;
-            alert(div)
-        }
-
-    });
+function count (elem) {
+     return num + elem
 }
 
+count(30);
+count(30);
+count(30);
+count(30);
+count(30);
+count(30);
 
-
-startWatch();
+console.log(num);
+console.log(num);

@@ -59,12 +59,14 @@ Snake.prototype.eatfood = function () {
     debugger;
 
     if((food.posX === headX ) && (food.posY === headY)) {
-        alert('Yeeee, boy!');
+
+        var eatedFood = document.querySelector('.food');
+        eatedFood.remove()
+        food.createFood();
+        food.generateFoodPos();
+        food.addFoodPos();
     }
 
-    if((food.posX === createSnake.snakeX ) && (food.posY === createSnake.snakeY)) {
-        alert('It eated!');
-    }
 };
 
 
